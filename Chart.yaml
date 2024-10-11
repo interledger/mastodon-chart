@@ -24,14 +24,14 @@ appVersion: "v4.3.0"
 
 dependencies:
   - name: elasticsearch
-    version: 19.19.2
+    version: ~19.19.4
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: elasticsearch.enabled
   - name: postgresql
-    version: 14.2.3
+    version: ~14.3.3
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
   - name: redis
-    version: 18.16.1
+    version: ~18.16.1
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: redis.enabled

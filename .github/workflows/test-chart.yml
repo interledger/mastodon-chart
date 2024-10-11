@@ -17,13 +17,14 @@ permissions:
 
 jobs:
   lint-templates:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: "3.x"
+          check-latest: true
 
       - name: Install dependencies (yamllint)
         run: pip install yamllint
@@ -53,7 +54,7 @@ jobs:
   # basic configuration can be used to successfully startup mastodon.
   #
   test-install:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
 
     strategy:
@@ -72,17 +73,14 @@ jobs:
           # - EKS: https://endoflife.date/amazon-eks
           #
           # The helm client's version can influence what helper functions is
-          # available for use in the templates, currently we need v3.6.0 or
+          # available for use in the templates, currently we need v3.8.0 or
           # higher.
           #
-          - k3s-channel: v1.21
-            helm-version: v3.8.0
-
-    env:
-      HELM_EXPERIMENTAL_OCI: "1"
+          - k3s-channel: v1.28
+            helm-version: v3.16.2
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # This action starts a k8s cluster with NetworkPolicy enforcement and
       # installs both kubectl and helm.
